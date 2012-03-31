@@ -1,3 +1,5 @@
+#labels Featured,Phase-Deploy
+<wiki:toc max_depth="3" />
 = User Manual =
 
 == Overview ==
@@ -60,4 +62,3 @@ It is designed to model synchronization and coordination of processes in paralle
 NuSMV is a symbol model checker, which also provides bounded model checking. You can get NuSMV and know more from [http://nusmv.fbk.eu].
 
 -----------
-<A href="http://code.google.com/p/s2n/">HomePage of S2N project</A>
