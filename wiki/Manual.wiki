@@ -14,7 +14,8 @@ Any questions, please email to yongjiang043@gmail.com .
 == 1. Installing S2N ==
 S2N can run on Linux and Windows. You can download the binary executables and the sources from http://code.google.com/p/s2n/downloads/list
 
-To recompile the source, you should have gcc and yacc (or bison) on your computer. If you are using Windows, these can be obtained from cygwin or MinGW. A copy of MinGW is available in the downloads of this project.
+To recompile the source, you should have gcc and yacc (or bison) on your computer. If you are using Windows, these can be obtained from cygwin or MinGW. 
+A copy of MinGW is available in http://www.mingw.org/.
 
 When the ready is done, uncompress the file you downloaded, and cd to that directory. Run the makefile by typing the command
 {{{
