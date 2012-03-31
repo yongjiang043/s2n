@@ -28,7 +28,7 @@ Add the path of s2n to your computer enviroment path variable if Windows, or cop
 
 Type 's2n' in your cmd or terminal, it will show as follows:
 {{{
-s2n: s2n version 1.0 -- 17 Dec 2010
+s2n: s2n version 1.0 -- Mar 22 2012
 }}}
 your installation of S2N successes.
 -----------
