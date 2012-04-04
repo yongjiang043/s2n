@@ -5,79 +5,6 @@
 #include "prosmv.h"
 #include "func.h"
 #include "express.h"
-/*
-extern int atom;
-
-static void putSide(int s)
-{
-    switch (s)
-    {
-        case ID:
-        {
-            nprintf(" & next(sup.exclusive) = %d", module_id);
-            break;
-        }
-        case GLOBAL:
-        {
-            nprintf(" & next(sup.exclusive) = 0");
-            break;
-        }
-        case NOCHANGE:
-        {
-            nprintf(" & next(sup.exclusive) = sup.exclusive");
-            break;
-        }
-        default:
-        {
-            break;
-        }
-    }
-}
-
-static void transOfNotProcessModule(Module *mod)
-{
-    nspace(6,smv);
-    nprintf("running");
-    if (mod->type == 'M')
-    {
-        nprintf(" & next(exclusive) = exclusive\n");
-    }
-    if (mod->type == 'C')
-    {
-        nprintf(" & next(sup.exclusive) = sup.exclusive\n");
-    }
-    nspace(4, smv);
-    nprintf("| !running\n");
-}
-
-static void conditionOfModule(Module *mod)
-{
-	Express *module_cond = mod->prov;
-
-    nprintf("running & ");
-
-    nprintf("!");
-    if (module_cond->oper != '(' && module_cond->lexp && module_cond->rexp)
-    {
-        nprintf("(");
-        putExpress(module_cond, smv);
-        nprintf(")");
-    }
-    else
-    {
-        printf("3\n");
-        putExpress(module_cond, smv);
-        printf("4\n");
-    }
-
-    nprintf(" & next(pc) = pc");
-
-    nprintf("\n");
-
-    nspace(4,smv);
-    nprintf("| running & ");
-    putExpress(module_cond, smv);
-}*/
 
 static void putLabNode(LabNode *ld)
 {
@@ -123,7 +50,7 @@ static void putLabNode(LabNode *ld)
             }
             nprintf(" & next(pc) = %d\n", arc->adjvex);
 
-            info(DEBUG, "--- --- --- flow M%d -> M%d created.", ld->lab, arc->adjvex);
+            info(DEBUG, "flow M%d -> M%d created.", ld->lab, arc->adjvex);
             arc = arc->nxtarc;
         }
         while (arc);

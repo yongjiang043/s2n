@@ -220,7 +220,7 @@ static void asgnNext(Lextok *lex, Module *sub)
     Varinf *tvar;
     Next *nt;
 
-    info(DEBUG, "--- --- --- ASGN of %s translating ...", lex->sym->name);
+    info(DEBUG, "ASGN of %s translating ...", lex->sym->name);
     if(!(tvar = lookupVar(lex->sym->name)))
     {
         info(ERROR, "variable %s without declare", lex->sym->name);
@@ -249,7 +249,7 @@ static void sendNext(Lextok *lex, Module *sub)
 
     rvar = chanVar(lex->lft);
 
-    info(DEBUG, "--- --- --- SEND of channel %s translating ...", rvar->name);
+    info(DEBUG, "SEND of channel %s translating ...", rvar->name);
     ch_module = rvar->chmod;
 
     for(vl = ch_module->varl, arg = lex->rgt;
@@ -288,7 +288,7 @@ static void receiveNext(Lextok *lex, Varinf *rvar, Module *sub)
     Express *econd, *rval;
     Next *nt;
 
-    info(DEBUG, "--- --- --- RECEIVE of channel %s translating ...", rvar->name);
+    info(DEBUG, "RECEIVE of channel %s translating ...", rvar->name);
 
     ch_module = rvar->chmod;
     econd = translateBinaryExpress(lex->excut_cond, unless_cond, '&');
@@ -358,12 +358,12 @@ static void unlessNext(Lextok *lex, Module *sub)
     Lextok *rlex;
     Element *el, *firstElementOfEscape;
 
-    info(DEBUG, "--- --- --- UNLESS translating ...");
+    info(DEBUG, "UNLESS translating ...");
 
     lsq = lex->sl->this;
     rsq = lex->sl->nxt->this;
 
-    info(DEBUG, "--- --- --- escape clause translating ...");
+    info(DEBUG, "escape clause translating ...");
     for (el = rsq->frst; el; el = el->nxt)
     {
         buildNext(el, sub);
@@ -381,7 +381,7 @@ static void unlessNext(Lextok *lex, Module *sub)
     rlex = firstElementOfEscape->n;
     if (rlex->excut_cond != NULL)
     {
-        info(DEBUG, "--- --- --- set unless condition and main clause translating ...");
+        info(DEBUG, "set unless condition and main clause translating ...");
 
         for (el = lsq->frst; el; el = el->nxt)
         {
@@ -394,7 +394,7 @@ static void unlessNext(Lextok *lex, Module *sub)
     }
     else
     {
-        info(DEBUG, "--- --- --- escape clause excutable with no condition, ignore main clause.");
+        info(DEBUG, "escape clause excutable with no condition, ignore main clause.");
     }
 }
 
@@ -402,7 +402,7 @@ static void ifOrDoNext(SeqList *sl, Module *sub)
 {
     Element *el;
 
-    info(DEBUG, "--- --- --- IF/DO translating ...");
+    info(DEBUG, "IF/DO translating ...");
 
     for(; sl; sl = sl->nxt)
     {
@@ -442,7 +442,7 @@ static void atomNext(Sequence *s, Module *sub)
 {
     Element *el = s->frst;
 
-    info(DEBUG, "--- --- --- ATOMIC/D_STEP translating ...");
+    info(DEBUG, "ATOMIC/D_STEP translating ...");
 
     while (el)
     {

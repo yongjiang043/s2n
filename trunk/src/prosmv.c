@@ -44,7 +44,7 @@ void putVar(Varinf *var)
         return;
     }
 
-    info(DEBUG, "--- --- --- variable %s declare ...", var->name);
+    info(DEBUG, "variable %s declare ...", var->name);
 
     nspace(4, smv);
     nprintf("%s : ",var->name); parray(var);
@@ -137,7 +137,7 @@ static void handle_varlist(VarList *vl, void (*put)(Varinf *))
 
 static void init(char *name, Varinf *var)
 {
-    info(DEBUG, "--- --- --- variable %s's init...", name);
+    info(DEBUG, "variable %s's init...", name);
 
     nspace(4,smv);
     nprintf("init(%s) := ", name);
@@ -212,29 +212,6 @@ void putInit(Varinf *var)
     }
 }
 
-/*
-static void putProvider(char *name)
-{
-    Express *e = s_context->prov;
-
-    if (e)
-    {
-        nspace(15, smv);
-        if (e->oper != '(' && e->lexp && e->rexp)
-        {
-            nprintf("!( ");
-            putExpress(e, smv);
-            nprintf(" )");
-        }
-        else
-        {
-            nprintf("!");
-            putExpress(e, smv);
-        }
-
-        nprintf(" : %s;\n", name);
-    }
-}*/
 
 static void putNext(Next *n, char *name)
 {
@@ -273,7 +250,7 @@ static void putNextList(Next *n)
 
     name = (char *)complicatingName(n->lvar, n->svar, n->idx);
 
-    info(DEBUG, "--- --- --- state change of variable %s start ...", name);
+    info(DEBUG, "state change of variable %s start ...", name);
 
     nspace(4, smv);
 
@@ -298,7 +275,7 @@ static void putNextList(Next *n)
         nspace(12,smv); nprintf("esac;\n");
     }
 
-    info(DEBUG, "--- --- --- state change of variable %s finished.", name);
+    info(DEBUG, "state change of variable %s finished.", name);
 }
 
 static void scanNextList(NextList  *nlist)
@@ -338,7 +315,7 @@ static void putModule(Module *md)
 
     s_context = md;
 
-    info(DEBUG, "--- module %s writting start ...", md->name);
+    info(DEBUG, "module %s writting start ...", md->name);
 
     if(md->usglob && !md->runable)
     {
@@ -359,40 +336,40 @@ static void putModule(Module *md)
 
     if(md->varl || md->varpc)
     {
-        info(DEBUG, "--- --- VAR session writting start ...");
+        info(DEBUG, " VAR session writting start ...");
         nspace(2, smv);
         nprintf("VAR\n");
         handle_varlist(md->varl, putVar);
         putVar(md->varpc);
-        info(DEBUG, "--- --- VAR clause finished.");
+        info(DEBUG, "VAR clause finished.");
     }
 
     if(!isAllProcessVariable(md->varl) || md->nextl)
     {
-        info(DEBUG, "--- --- ASSIGN session writting start ...");
+        info(DEBUG, "ASSIGN session writting start ...");
         nspace(2, smv);
         nprintf("ASSIGN\n");
         handle_varlist(md->varl, putInit);
         putInit(md->varpc);
         scanNextList(md->nextl);
-        info(DEBUG, "--- --- ASSIGN session finishend.");
+        info(DEBUG, "ASSIGN session finishend.");
     }
 
     if(md->pctran || md->type != 'P')
     {
-        info(DEBUG, "--- --- TRANS session writting start ...");
+        info(DEBUG, "TRANS session writting start ...");
         nspace(2, smv);
         nprintf("TRANS\n");
         putTrans(md);
-        info(DEBUG, "--- --- TRANS session finished.");
+        info(DEBUG, "TRANS session finished.");
     }
     else
     {
-        info(DEBUG, "--- --- there is no TRANS session in this module.");
+        info(DEBUG, "there is no TRANS session in this module.");
     }
     nprintf("\n");
 
-    info(DEBUG, "--- module %s wittern finished.", md->name);
+    info(DEBUG, "module %s wittern finished.", md->name);
 }
 
 static void scanModuleList()

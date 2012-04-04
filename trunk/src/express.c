@@ -13,7 +13,7 @@ Express *expressOfPointInChanModule(Lextok *, int, int);
 void checkEQandNEExpressionType(Express *);
 
 char *complicatingName(Varinf *v, Varinf *sv, int idx)
-{  
+{
     char *name;
     char post[5];
 
@@ -174,57 +174,6 @@ Express *translateBinaryExpress(Express *lexp, Express *rexp, int op)     /* bin
 
     return exp;
 }
-/*
-Express *expressForExclusive(int modid, int bo)    // bo = 0 for "(exclusive != 0 & exclusive != nid)", bo = 1 for "(exclusive = 0 | exclusive = nid)"
-{
-    Module *pre_context = s_context;
-    Express *llexp, *rrexp, *lexp, *rexp;
-    Express *exp =(Express *)emalloc(sizeof(Express));
-
-    s_context = Mlist->this;
-    exp->oper = '(';
-
-    llexp = (Express *)emalloc(sizeof(Express));
-    llexp->oper = NAME; llexp->type = INTEGER;
-    if(!(llexp->var = lookupVar(exclusive)))
-    {
-        info(ERROR, "variable exclusive without declared-- cannot happen");
-    }
-
-    rrexp = (Express *)emalloc(sizeof(Express));
-    rrexp->oper = CONST; rrexp->type = INTEGER;
-    rrexp->value = 0;
-
-    lexp = (Express *)emalloc(sizeof(Express));
-    lexp->type = BOOLEAN;
-    lexp->priority = 10;
-    lexp->lexp = llexp; lexp->rexp = rrexp;
-
-    rrexp = (Express *)emalloc(sizeof(Express));
-    rrexp->oper = CONST; rrexp->type = INTEGER;
-    rrexp->value = modid;
-
-    rexp = (Express *)emalloc(sizeof(Express));
-    rexp->type = BOOLEAN;
-    lexp->priority = 10;
-    rexp->lexp = llexp; rexp->rexp = rrexp;
-
-    if (bo)
-    {
-        lexp->oper = rexp->oper = EQ;
-        exp->rexp = translateBinaryExpress(lexp, rexp, '|');
-        exp->type = exp->rexp->type;
-    }
-    else
-    {
-        lexp->oper = rexp->oper = NE;
-        exp->rexp = translateBinaryExpress(lexp, rexp, '&');
-        exp->type = exp->rexp->type;
-    }
-
-    s_context = pre_context;
-    return exp;
-}*/
 
 /*
  * return element of chan module elej[idx] as an express
