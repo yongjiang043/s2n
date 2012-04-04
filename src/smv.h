@@ -80,6 +80,15 @@ typedef struct Express
    struct Express *rexp;
 } Express;
 
+/*pc flowmap*/
+/*
+typedef struct Varnext {
+    struct Varinf *var;
+    struct Express *val;
+    struct Varnext *nxt;
+} Varnext;
+*/
+
 typedef struct LabNode
 {
     int lab;

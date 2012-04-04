@@ -316,7 +316,7 @@ ch_init: '[' CONST ']' OF '{' typ_list '}'
               if (0 == $2->val)
               {
                     $$->rev = 1;
-                    info(WARN, "rendezvous communiation isnot supported in s2n; it will be replayed by single message!");
+                    info(NOTE, "receive of rendezvous can not happen in atomic/d_step");
                     $$->val = 1;
               }
            }

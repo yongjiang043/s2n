@@ -65,23 +65,23 @@ static void buildMainModule()
     LexList *lt;
     Module  *mn;
 
-    info(DEBUG, "--- --- creating module main ...");
+    info(DEBUG, "creating module main ...");
 
     mn = createModule("main", 'M');
     Mlist = addModuleToModuleList(Mlist, mn);
 
     s_context = mn;
     /*varibles in MOUDLE main and their initialization*/
-    info(DEBUG, "--- --- translating global variable to module main ...");
+    info(DEBUG, "translating global variable to module main ...");
 
     for (lt = Gtype; lt; lt = lt->next)
     {
         translateVars(lt->this, mn);
     }
 
-    info(DEBUG, "--- --- global variables translated.");
+    info(DEBUG, "global variables translated.");
 
-    info(DEBUG, "--- --- module main created.");
+    info(DEBUG, "module main created.");
 }
 
 /*
@@ -94,11 +94,11 @@ static void buildModule(ProcList *pt)
     Module  *mn;
     Varinf *pc;
 
-    tname = (char *)emalloc(sizeof(strlen(pt->n->name)+5));
+    tname = (char *)emalloc(strlen(pt->n->name)+5);
 //    strcpy(tname, "P_");                      /* in case strlen(pt->n->name) = 1 */
-    strcat(tname, pt->n->name);
+    strcpy(tname, pt->n->name);
 
-    info(DEBUG, "--- --- create module %s ...", tname);
+    info(DEBUG, "create module %s ...", tname);
     mn = createModule(tname, 'P');
     mn->runable = pt->runable;
 
@@ -110,11 +110,11 @@ static void buildModule(ProcList *pt)
 
     Mlist = addModuleToModuleList(Mlist, mn);
 
-    info(DEBUG, "--- --- begin translating sequence in proctype %s ...", pt->n->name);
+    info(DEBUG, "begin translating sequence in proctype %s ...", pt->n->name);
     translateProcess(pt, mn);
-    info(DEBUG, "--- --- sequence translated.");
+    info(DEBUG, "sequence translated.");
 
-    info(DEBUG, "--- --- add variable pc to varpc ...");
+    info(DEBUG, "add variable pc to varpc ...");
     pc = createVar("pc", INTEGER, 0, 1, pt->max_mark + 1);
     pc->ini = 1;
     pc->context = s_context;
@@ -122,11 +122,11 @@ static void buildModule(ProcList *pt)
 
     mn->varpc = pc;
 
-    info(DEBUG, "--- --- building constraint on variable pc ...");
+    info(DEBUG, "building constraint on variable pc ...");
     flowModule(pt, mn);
-    info(DEBUG, "--- --- constraint in TRANS finished.");
+    info(DEBUG, "constraint in TRANS finished.");
 
-    info(DEBUG, "--- --- module %s created.", mn->name);
+    info(DEBUG, "module %s created.", mn->name);
 
     if(pt->pronum > 0)
     {
@@ -142,11 +142,11 @@ static void buildModules()
     for (dl = topoOrder; dl; dl = dl->nxtTopoEle)
     {
         pt = dl->host;
-        info(DEBUG, "--- proctype %s to module %s start building ...", pt->n->name, pt->n->name);
+        info(DEBUG, "proctype %s to module %s start building ...", pt->n->name, pt->n->name);
 
         buildModule(pt);
 
-        info(DEBUG, "--- proctype %s to module %s builded\n", pt->n->name, pt->n->name);
+        info(DEBUG, "proctype %s to module %s builded\n", pt->n->name, pt->n->name);
     }
 
     s_context = Mlist->this;
@@ -195,7 +195,7 @@ static Module *buildChanModule(Lextok *lt)
 
     pname = createChanName(lt);
 
-    info(DEBUG, "--- --- --- --- creating module %s and her variables ...", pname);
+    info(DEBUG, "creating module %s and her variables ...", pname);
     mod = createModule(pname, 'C');
 
     last_context = s_context;
@@ -211,7 +211,7 @@ static Module *buildChanModule(Lextok *lt)
 
     createVarOfChanModule("point", INTEGER, size, mod);
 
-    info(DEBUG, "--- --- --- --- module %s created.", mod->name);
+    info(DEBUG, "module %s created.", mod->name);
     s_context = last_context;
     return mod;
 }
@@ -283,14 +283,14 @@ Module *lookupChanModule(Lextok *clex)
 
     if (!t->cmod)
     {
-        info(DEBUG, "--- --- --- --- module of chan doesnot exists.");
+        info(DEBUG, "module of chan doesnot exists.");
         m = buildChanModule(clex);
         t->cmod = m;
         Mlist = addModuleToModuleList(Mlist, m);
     }
     else
     {
-        info(DEBUG, "--- --- --- --- module of chan has already existed.");
+        info(DEBUG, "module of chan has already existed.");
         m = t->cmod;
     }
 
@@ -301,9 +301,9 @@ void build()
 {
     ModList *l;
 
-    info(DEBUG, "--- module main start building ...");
+    info(DEBUG, "module main start building ...");
     buildMainModule();
-    info(DEBUG, "--- module main builded\n");
+    info(DEBUG, "module main builded\n");
 
     buildModules();
 

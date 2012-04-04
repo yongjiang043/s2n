@@ -200,7 +200,7 @@ static Varinf *translateVar(Lextok *l)
     int inival, bits;
     Varinf *var;
 
-    info(DEBUG, "--- --- --- translating variable %s ...", l->sym->name);
+    info(DEBUG, "translating variable %s ...", l->sym->name);
 
     var = createVar(l->sym->name, 0, 0, 0, 0);
     var->context = s_context;
@@ -245,7 +245,7 @@ static Varinf *translateVar(Lextok *l)
     }
 
     ready(var);
-    info(DEBUG, "--- --- --- variable %s translated.", l->sym->name);
+    info(DEBUG, "variable %s translated.", l->sym->name);
     return var;
 }
 
@@ -300,7 +300,7 @@ static VarList *translateChan(Lextok *tchan)
     Module  *chmod;
     VarList *vlist = (VarList *)0;
 
-    info(DEBUG, "--- --- --- translating chan %s", tchan->sym->name);
+    info(DEBUG, "translating chan %s", tchan->sym->name);
     chmod = lookupChanModule(tchan->sym->ini);    /* build MODULE of chan */
 
     if(tchan->sym->isarray)                         /* if chan q[3], add variable q_1,q_2,q_3 to module main */
@@ -310,7 +310,7 @@ static VarList *translateChan(Lextok *tchan)
             tname = (char *)emalloc(strlen(tchan->sym->name)+8);
             sprintf(tname,"%s_%d", tchan->sym->name, i);
 
-            info(DEBUG, "--- --- --- add variable %s to varlist.", tname);
+            info(DEBUG, "add variable %s to varlist.", tname);
 
             var = setVarOfModule(chmod, tname);
             vlist = addVarToVarList(vlist, var);
@@ -320,13 +320,13 @@ static VarList *translateChan(Lextok *tchan)
     }
     else
     {
-        info(DEBUG, "--- --- --- add variable %s to varlist.", tchan->sym->name);
+        info(DEBUG, "add variable %s to varlist.", tchan->sym->name);
         /*if chan q, add variable q to module main*/
         var = setVarOfModule(chmod, tchan->sym->name);
         vlist = addVarToVarList(vlist, var);
     }
 
-    info(DEBUG, "--- --- --- chan %s translated.", tchan->sym->name);
+    info(DEBUG, "chan %s translated.", tchan->sym->name);
     return vlist;
 }
 
@@ -432,9 +432,9 @@ void translateProcess(ProcList *p, Module *m)
 {
     if(p->p)
     {
-        info(DEBUG, "--- --- --- translating parameter variables ...");
+        info(DEBUG, "translating parameter variables ...");
         translateParameter(p->p, m);
-        info(DEBUG, "--- --- --- translated");
+        info(DEBUG, "translated");
     }
 
     translateSeq(p->s, m);
@@ -476,7 +476,7 @@ static void initialModule(char *name, Module *m)
     Varinf  *var;
     VarList *lt;
 
-    info(DEBUG, "--- --- create instance %s of module %s ...", name, m->name);
+    info(DEBUG, "create instance %s of module %s ...", name, m->name);
     var = createVar(name, PROCESS, 0, 0, 0);
     var->context = Mlist->this;
     var->chmod = m;
@@ -486,7 +486,7 @@ static void initialModule(char *name, Module *m)
     lt->this = var;
     addVarListToModule(Mlist->this, lt);
 
-    info(DEBUG, "--- --- instance %s of module %s created.", name, m->name);
+    info(DEBUG, "instance %s of module %s created.", name, m->name);
 }
 
 /*
