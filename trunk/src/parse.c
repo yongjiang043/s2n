@@ -14,6 +14,7 @@ ProcList *Plist = (ProcList *)0;
 SeqList  *cur_s = (SeqList  *)0;
 DynamicList *topoOrder = (DynamicList *)0;
 
+static char *keyWord[] = {"self", "running", "next", "main", "init", "initial"};
 static int Unique = 0, DstepStart = -1;
 static int break_id = 0;
 static Symbol   *symtab[Nhash+1];
@@ -24,6 +25,29 @@ static DynamicList *stack = (DynamicList *)0;
 
 static Element *newElement(Lextok *);
 static void attach_escape(Sequence *, Sequence *);
+
+static int isKeyword(char *name)
+{
+    int i;
+
+    for(i = 0; i < 2; i++)
+    {
+        if(!strcmp(keyWord[i], name))
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void checkIfKeyword(char *name)
+{
+	if(isKeyword(name))
+    {
+        info(ERROR, "name %s is reserved!", name);
+    }
+}
 
 static int sameName(Symbol *a, Symbol *b)
 {

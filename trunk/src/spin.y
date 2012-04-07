@@ -751,8 +751,9 @@ nlst: NAME
               {
                  info(WARN, "strlen of mtype constant should be bigger than 1, or NuSMV will not recongize it");
               }
+			  checkIfKeyword($1->sym->name);
               $$ = nn($1, NAME, ZN, ZN);
-              $$ = nn(ZN, ',', $$, ZN); 
+              $$ = nn(ZN, ',', $$, ZN);
            }
     | nlst NAME                    
            {
@@ -760,6 +761,7 @@ nlst: NAME
               {
                  info(WARN, "strlen of mtype constant should be bigger than 1, or NuSMV will not recongize it");
               }
+			  checkIfKeyword($2->sym->name);
               $$ = nn($2, NAME, ZN, ZN);
               $$ = nn(ZN, ',', $$, $1);
            }

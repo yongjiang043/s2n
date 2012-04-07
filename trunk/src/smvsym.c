@@ -8,22 +8,6 @@
 #include "parse.h"
 
 static VarList *nametab[Nhash + 1];
-static char *keyWord[] = {"self", "running"};
-
-static int isKeyword(char *name)
-{
-    int i;
-
-    for(i = 0; i < 2; i++)
-    {
-        if(!strcmp(keyWord[i], name))
-        {
-            return 1;
-        }
-    }
-
-    return 0;
-}
 
 int sameContext(Module *a,Module *b)
 { 
@@ -74,10 +58,7 @@ void ready(Varinf *v)
     VarList *sl, *stmp;
     int h;
 
-    if(isKeyword(v->name))
-    {
-        info(ERROR, "name %s is reserved!");
-    }
+	checkIfKeyword(v->name);
 
     h = hash(v->name);
 
