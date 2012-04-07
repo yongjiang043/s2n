@@ -397,7 +397,7 @@ static struct
     {"goto",      GOTO,          0,        0},
     {"hidden",    HIDDEN,        0,        ":hide:"},
     {"if",        IF,            0,        0},
-    {"init",      INIT,          0,        "init"},
+    {"init",      INIT,          0,        "initial"},
     {"int",       TYPE,        INT,        0},
     {"len",       LEN,           0,        0},
     {"local",     ISLOCAL,       0,        ":local:"},

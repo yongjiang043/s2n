@@ -17,6 +17,7 @@ int     hash(char *);
 int     isMtype(char *);
 int     isProctype(char *);
 int     properEnabler(Lextok *n);
+void    checkIfKeyword(char *);
 void    remSeq();
 void    unRemSeq();
 void    pushBreak();
