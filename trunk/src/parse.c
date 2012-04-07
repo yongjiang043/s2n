@@ -1131,6 +1131,13 @@ void checkAtomic(Sequence *s, int added)
                 }
                 break;
             }
+			case 'r':
+			{
+				if(f->n->sym->rev == 1)
+			    {
+			       info(WARN, "receive of rendezvous can not happen in atomic/d_step");
+			    }
+			}
             default:
                 break;
         }
