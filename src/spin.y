@@ -316,7 +316,6 @@ ch_init: '[' CONST ']' OF '{' typ_list '}'
               if (0 == $2->val)
               {
                     $$->rev = 1;
-                    info(NOTE, "receive of rendezvous can not happen in atomic/d_step");
                     $$->val = 1;
               }
            }
@@ -747,20 +746,20 @@ rargs: rarg                        { $$ = nn(ZN, ',', $1, ZN); }
 
 nlst: NAME                       
            {
-              if(strlen($1->sym->name) == 1)
+              /*if(strlen($1->sym->name) == 1)
               {
                  info(WARN, "strlen of mtype constant should be bigger than 1, or NuSMV will not recongize it");
-              }
+              }*/
 			  checkIfKeyword($1->sym->name);
               $$ = nn($1, NAME, ZN, ZN);
               $$ = nn(ZN, ',', $$, ZN);
            }
     | nlst NAME                    
            {
-              if(strlen($2->sym->name) == 1)
+              /*if(strlen($2->sym->name) == 1)
               {
                  info(WARN, "strlen of mtype constant should be bigger than 1, or NuSMV will not recongize it");
-              }
+              }*/
 			  checkIfKeyword($2->sym->name);
               $$ = nn($2, NAME, ZN, ZN);
               $$ = nn(ZN, ',', $$, $1);
