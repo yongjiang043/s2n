@@ -1,4 +1,4 @@
-# A example. There is nothing to check in this model.
+# An example. There is nothing to check in this model.
 
 = Queue =
 

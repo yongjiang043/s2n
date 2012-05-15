@@ -1,4 +1,4 @@
-# A example. We have added the specification manually both in SPIN model and NuSMV model. 
+# An example. We have added the specification manually both in SPIN model and NuSMV model. 
 
 = Sleep-Wakeup Process Scheduling =
 == Description ==
