@@ -11,11 +11,11 @@
 
 FILE  *yyin, *yyout;
 double costTime;
-char  out1[8];                 /* name of the file after preprocessed */
-int   debug = 0;
-int   ifmark = 0;              /* whether users need the file labeling.pml after labeled */
-char  *srcfile = NULL;         /* name of input file */
-char  *trgfile = NULL;         /* name of target file */
+char  out1[8];                 // name of the file after preprocessed 
+int   debug = 0;               // if debug is needed 
+int   ifmark = 0;              // whether users need the file labeling.pml after labeled 
+char  *srcfile = NULL;         // name of input file 
+char  *trgfile = NULL;         // name of target file 
 
 static char *PreProc = CPP;
 static char Operator[] = "operator: ";
@@ -398,7 +398,7 @@ void explain(int n)
 }
 
 /*
- * input spin file's name should end with ".pml"
+ * Making sure that the input file of s2n should be ended with ".pml".
  */
 static void checkSrcname()
 {
@@ -415,8 +415,7 @@ error:  info(ERROR, "cannot open file %s, spinfile should end with \".pml\"", sr
     }
 }
 
-static void 
-preProcess(char *a, char *b)
+static void preProcess(char *a, char *b)
 {
     char precmd[100],cmd[2048] ;
 
@@ -452,7 +451,7 @@ int main(int argc, char *argv[])
         {
             case 'm': case 'M':
             {
-                ifmark = 1; break;    // output the marked file
+                ifmark = 1; break;    // output the marked file.
             }
             case 'h': case 'H':
             {
@@ -462,7 +461,7 @@ int main(int argc, char *argv[])
             }
             case 'd': case 'D':
             {
-                debug = 1; break;
+                debug = 1; break;     // debug is needed.
             }
             default :
             {
@@ -500,7 +499,7 @@ int main(int argc, char *argv[])
 
         if (argc > 1)
         {
-            if (argc == 3 && !strcmp(argv[1],"-o"))        /*set target file */
+            if (argc == 3 && !strcmp(argv[1],"-o"))        // set target file
             {
                 trgfile = (char *)emalloc(strlen(argv[2]) + 1);
                 strcpy(trgfile, argv[2]);
@@ -517,11 +516,6 @@ int main(int argc, char *argv[])
         usetip();
         info(ERROR, "no input file");
     }
-//        s = lookup("_");          s->type = PREDEF;
-//        s = lookup("_p");         s->type = PREDEF;
-//        s = lookup("_pid");         s->type = PREDEF;
-//        s = lookup("_last");         s->type = PREDEF;
-//        s = lookup("_nr_pr");         s->type = PREDEF;
 
     info(DEBUG, "parse start ...");
     yyparse();
