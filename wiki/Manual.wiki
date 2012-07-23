@@ -27,6 +27,8 @@ make clean
 }}}
 Add the path of s2n to your computer enviroment path variable if Windows, or copy the exectables to your default seach path (such as your home bin directory, or /usr/local/bin etc) in Linux. 
 
+cpp is required for preprocessing your file, so before you run this tool, make sure you have cpp in your computer. If you are using Windows, cpp can be obtained from MinGW.
+
 Type 's2n' in your cmd or terminal, it will show as follows:
 {{{
 s2n: s2n version 1.0 -- Mar 22 2012
